@@ -8,7 +8,8 @@
     </clipPath>
   </defs>
   <g id="_02_login" data-name="02_login" clip-path="url(#clip-_02_login)">
-    <rect width="375" height="812" fill="#858585"/>
+<!--    <rect width="375" height="812" fill="#858585"/>-->
+    <rect width="375" height="812" fill="#474747"/>
     <g id="bg" clip-path="url(#clip-path)">
       <g id="Group_8" data-name="Group 8">
         <g id="Group_6" data-name="Group 6" transform="translate(-1207.795 1159.899)" opacity="0.09">

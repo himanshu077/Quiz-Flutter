@@ -11,6 +11,9 @@ class AppColors{
   static Color darkTextColor = const Color(0xFF474747);
   static Color black = Colors.black;
   static Color primaryGreen = const Color(0xFF15C6A6);
+  static Color gradientLightGreen = const Color(0xFF48F6CA);
+  static Color gradientDarkGreen = const Color(0xFF4FA4AC);
+  static Color primaryGreen2 = const Color(0xFF3B997E);
   static Color primaryLightGreen = const Color(0xFF71B85F);
   static Color primaryMidGreen = const Color(0xFFC3F4EB);
   static Color greenLightBg = const Color(0xFFF1FCFA);
@@ -25,5 +28,7 @@ class AppColors{
   static Color redLightBg = const Color(0xFFFFF1EE);
   static Color blue = const Color(0xFF1B70F0);
   static Color transparent = Colors.transparent;
+
+  // stroke="#707070"
 
 }

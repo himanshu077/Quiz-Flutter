@@ -12,6 +12,7 @@ class SvgImage extends StatelessWidget {
   final EdgeInsets? margin;
   final Function()? onTap;
   final bool hasBorder;
+  final Color? tintColor;
 
   const SvgImage(
       {super.key,
@@ -19,7 +20,7 @@ class SvgImage extends StatelessWidget {
         this.size,
         this.height,
         this.width,
-        this.fit, this.onTap, this.radius, this.margin, this.hasBorder = false, });
+        this.fit, this.onTap, this.radius, this.margin, this.hasBorder = false, this.tintColor, });
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +42,7 @@ class SvgImage extends StatelessWidget {
                   width: size ?? width,
                   height: size ?? height,
                   fit: fit ?? BoxFit.cover,
+                  color: tintColor,
                 )
                 ,
               ),

@@ -72,6 +72,7 @@ class TextStyles{
   static TextStyle regular12GreyMidText = TextStyle(color: AppColors.greyMidText, fontSize: AppFonts.s12, fontFamily: Family.regular);
   static TextStyle regular12SemiDarkGreyText = TextStyle(color: AppColors.greySemiDarkGreyText, fontSize: AppFonts.s12, fontFamily: Family.regular);
   static TextStyle regular12Red = TextStyle(color: AppColors.red, fontSize: AppFonts.s12, fontFamily: Family.regular);
+  static TextStyle regular12White = TextStyle(color: AppColors.white, fontSize: AppFonts.s12, fontFamily: Family.regular);
 
   static TextStyle regular13GreyMidText = TextStyle(color: AppColors.greyMidText, fontSize: AppFonts.s13, fontFamily: Family.regular);
   static TextStyle regular13Red = TextStyle(color: AppColors.red, fontSize: AppFonts.s13, fontFamily: Family.regular);
@@ -95,9 +96,11 @@ class TextStyles{
   static TextStyle regular15White = TextStyle(color: AppColors.white, fontSize: AppFonts.s15, fontFamily: Family.regular);
   static TextStyle regular15Red2 = TextStyle(color: AppColors.red2, fontSize: AppFonts.s15, fontFamily: Family.regular);
   static TextStyle regular15Red = TextStyle(color: AppColors.red, fontSize: AppFonts.s15, fontFamily: Family.regular);
+  static TextStyle regular15Green = TextStyle(color: AppColors.primaryGreen, fontSize: AppFonts.s15, fontFamily: Family.regular);
 
   static TextStyle regular16Black = TextStyle(color: AppColors.black, fontSize: AppFonts.s16, fontFamily: Family.regular);
   static TextStyle regular16DarkText= TextStyle(color: AppColors.darkTextColor, fontSize: AppFonts.s16, fontFamily: Family.regular);
+  static TextStyle regular16GreyMidText = TextStyle(color: AppColors.greyMidText, fontSize: AppFonts.s16, fontFamily: Family.regular);
 
   static TextStyle regular17GreyMidText = TextStyle(color: AppColors.greyMidText, fontSize: AppFonts.s17, fontFamily: Family.regular);
   static TextStyle regular17P_Green = TextStyle(color: AppColors.primaryGreen, fontSize: AppFonts.s17, fontFamily: Family.regular);
@@ -140,6 +143,8 @@ class TextStyles{
   static TextStyle medium18Black = TextStyle(color: AppColors.black, fontSize: AppFonts.s18, fontFamily: Family.medium);
 
   static TextStyle medium20Black = TextStyle(color: AppColors.black, fontSize: AppFonts.s20, fontFamily: Family.medium);
+
+  static TextStyle medium24BorderGrey = TextStyle(color: AppColors.greyLightBorder, fontSize: AppFonts.s24, fontFamily: Family.medium);
 
 
 
