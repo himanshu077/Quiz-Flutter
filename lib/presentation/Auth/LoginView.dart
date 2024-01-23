@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_flutter_app/presentation/Quiz/QuizView.dart';
+import 'package:quiz_flutter_app/utils/AppExtenstions.dart';
 
 import '../../coreComponents/AppWidgets/AppBgScaffold.dart';
 import '../../coreComponents/appComponents/AppButton.dart';
@@ -34,7 +36,9 @@ class _LoginViewState extends State<LoginView> {
               ),
             ),
             AppButton(
-              onTap: (){},
+              onTap: (){
+                context.pushAndClearNavigator(const QuizView());
+              },
               label: "Let's Start Qiz",
             )
           ],
