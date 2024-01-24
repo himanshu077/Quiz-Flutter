@@ -1,130 +1,143 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quiz_flutter_app/Model/MCQOptionItemModel.dart';
 import 'package:quiz_flutter_app/coreComponents/components/DummyData.dart';
 
 import '../../Model/MCQModel.dart';
-final obj = McqModel(
-    question: 'When the measured length is less than the actual length, the error is known as ?',
-    answer: 'negative error',
-    options: [
-      McqOptionItemModel(
-          status: McqItemStatusEmun.unAttempt,
-          value: 'positive error'
-      ),
-      McqOptionItemModel(
-          status: McqItemStatusEmun.unAttempt,
-          value: 'negative error'
-      ),McqOptionItemModel(
-          status: McqItemStatusEmun.unAttempt,
-          value: 'compensating error'
-      ),McqOptionItemModel(
-          status: McqItemStatusEmun.unAttempt,
-          value: 'instrumental error'
-      ),
-    ],
-);
 
-class QuizController extends GetxController with GetTickerProviderStateMixin{
+class QuizController extends GetxController with GetTickerProviderStateMixin {
 
+  // animation objects......
   AnimationController? _animationController;
-  Animation? _animation;
-  // so that we can access our animation outside
-  Animation? get animation => _animation;
+  final Rx<Animation?> _animation = Rx<Animation?>(null);
 
+  // so that we can access our animation outside
+  Animation? get animation => _animation.value;
+  Timer? _mainTimer;
+
+
+
+  //quiz objects.......
   final RxList<McqModel> _quiz = RxList<McqModel>([]);
+  List<McqModel> get quiz => _quiz;
 
   final RxInt _activeQsnIndex = RxInt(0);
   int get activeQsnIndex => _activeQsnIndex.value;
-  bool get isLastQsn => activeQsnIndex == quiz.length -1;
 
-  List<McqModel> get quiz => _quiz;
+  bool get isLastQsn => activeQsnIndex == quiz.length - 1;
+
+  //result count object....
   final RxInt _correctCount = RxInt(0);
   int get correctCount => _correctCount.value;
 
 
-  // @override
-  // void onInit() {
-  //
-  //
-  //   super.onInit();
-  // }
 
-  getQuestion(){
-    List<McqModel> list  = List<McqModel>.from(quizJSON.map((json) => McqModel.fromJson(json)));
+  //on enter quiz view.....
+  getQuestion() {
+    _clearQuiz();
+    List<McqModel> list =
+        List<McqModel>.from(quizJSON.map((json) => McqModel.fromJson(json)));
     _quiz.assignAll(list);
-    startAnimate();
+    _startAnimate();
   }
 
-  startAnimate(){
-
-    print(obj.toJson());
+  _startAnimate() {
     // Our animation duration is 60 s
     // so our plan is to fill the progress bar within 60s
-    _animationController =
-        AnimationController(duration: Duration(seconds: 60), vsync: this);
-    _animation = Tween<double>(begin: 0, end: 1).animate(_animationController!)
-      ..addListener(() {
-        // update like setState
-        update();
-      });
+    final durationValue = 60 - quiz[activeQsnIndex].timeConsumed;
+    final beginValue =
+        quiz[activeQsnIndex].timeConsumed != 0 ? 1 - (durationValue / 60) : 0.0;
+
+    _animationController = AnimationController(
+        duration: Duration(seconds: durationValue), vsync: this);
+    _animation.value =
+        Tween<double>(begin: beginValue, end: 1).animate(_animationController!)
+          ..addListener(() {
+            _animation.refresh();
+          });
+
+    _mainTimer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
+      final value = quiz[activeQsnIndex].timeConsumed + 1;
+
+      if (value == 60) {
+        _quiz[activeQsnIndex].isClosed = true;
+      }
+      _quiz[activeQsnIndex].timeConsumed = value;
+
+      _quiz.refresh();
+    });
 
     // start our animation
     // Once 60s is completed go to the next qn
     _animationController!.forward().whenComplete(onSkip);
   }
 
-
-
-
-
-
   // on skip button click navigate to next question....
-  void onSkip(){
+  void onSkip() {
     _animationController!.reset();
-    if(!isLastQsn){
-      startAnimate();
+    _mainTimer!.cancel();
+    if (!isLastQsn) {
       _activeQsnIndex.value = activeQsnIndex + 1;
+      _startAnimate();
     }
   }
 
-
-  // resetAnimation(){
-  //   // Reset the counter
-  //   _animationController!.reset();
-  //
-  //   // Then start it again
-  //   // Once timer is finish go to the next qn
-  //   _animationController!.forward().whenComplete(onSkip);
-  //
-  // }
-
-
   // on back press navigate to previous question....
-  void onBackPress(){
-    if(activeQsnIndex > 0){
-      _activeQsnIndex.value = activeQsnIndex - 1;
+  void onBackPress() {
+    if (activeQsnIndex > 0) {
+      _mainTimer!.cancel();
+      _animationController!.reset();
+      final index = _findPreviousIncompleteIndex(activeQsnIndex);
+      if(index != null){
+        _activeQsnIndex.value = index;
+      }else{
+        _activeQsnIndex.value = activeQsnIndex - 1;
+      }
+      _startAnimate();
     }
+  }
+
+  // on back press find previous question index where question time is not complete....
+  int? _findPreviousIncompleteIndex(int activeIndex) {
+    int? value;
+    for (int i = activeIndex - 1; i >= 0; i--) {
+      if (!quiz[i].isClosed) {
+        value = i;
+        break;
+      }
+    }
+    return value;
   }
 
   //on attempt question, save user option selected and navigate to next question...
-  void onSelectOption(int optionIndex){
+  void onSelectOption(int optionIndex) {
     _quiz[activeQsnIndex].selectedValue = optionIndex;
     _quiz.refresh();
-    Future.delayed(const Duration(milliseconds: 700),(){
-
+    Future.delayed(const Duration(milliseconds: 700), () {
+      //on attempt action, we will move further to next question...
       onSkip();
     });
   }
 
-  void generateReport(){
+  // on generateReport calculate accurate questions count....
+  void generateReport() {
     int count = 0;
-    for(var item in quiz){
+    for (var item in quiz) {
       final answer = item.answer;
-      if(item.selectedValue != null && item.options![item.selectedValue!].value == item.answer){
-        count ++;
+      if (item.selectedValue != null &&
+          item.options![item.selectedValue!].value == item.answer) {
+        count++;
       }
     }
     _correctCount.value = count;
+  }
+
+
+  _clearQuiz(){
+    _activeQsnIndex.value = 0;
+    _mainTimer?.cancel();
+    _quiz.clear();
+    _correctCount.value = 0;
   }
 }
