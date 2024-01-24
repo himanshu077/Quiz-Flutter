@@ -37,7 +37,8 @@ class _LoginViewState extends State<LoginView> {
             ),
             AppButton(
               onTap: (){
-                context.pushAndClearNavigator(const QuizView());
+                // context.pushAndClearNavigator(const QuizView());
+                context.pushNavigator(const QuizView());
               },
               label: "Let's Start Qiz",
             )
