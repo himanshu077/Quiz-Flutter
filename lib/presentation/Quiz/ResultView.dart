@@ -8,6 +8,7 @@ import 'package:quiz_flutter_app/coreComponents/appComponents/TextView.dart';
 import 'package:quiz_flutter_app/coreComponents/components/AppFonts.dart';
 import 'package:quiz_flutter_app/coreComponents/components/TextStyles.dart';
 import 'package:quiz_flutter_app/presentation/Quiz/QuizController.dart';
+import 'package:quiz_flutter_app/utils/AppExtenstions.dart';
 
 class ResultView extends StatefulWidget {
   const ResultView({super.key});
@@ -31,7 +32,9 @@ class _ResultViewState extends State<ResultView> {
     return AppBgScaffold(
         child: Column(
       children: [
-        AppBar2(),
+        AppBar2(
+          onLeadTap: context.pop,
+        ),
         Expanded(
             child: SingleChildScrollView(
               padding: EdgeInsets.all(AppFonts.s20),
@@ -61,7 +64,7 @@ class _ResultViewState extends State<ResultView> {
                     physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) =>
                         ResultListTile(data: quizCtrl.quiz[index]),
-                    separatorBuilder: (context, index) => SizedBox(
+                    separatorBuilder: (context, index) => const SizedBox(
                           height: 20,
                         ),
                     itemCount: quizCtrl.quiz.length),

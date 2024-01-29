@@ -22,29 +22,29 @@ class ProgressBar extends StatelessWidget {
         borderRadius: BorderRadius.circular(50),
       ),
       child: GetBuilder<QuizController>(
-        // init: QuestionController(),
         builder: (controller) {
           return Stack(
             children: [
               // LayoutBuilder provide us the available space for the conatiner
               // constraints.maxWidth needed for our animation
               LayoutBuilder(
-                builder: (context, constraints) => Container(
-                  // from 0 to 1 it takes 60s
-                  width: controller.animation!= null ? constraints.maxWidth * controller.animation!.value : 0,
-                  // constraints.maxWidth * controller.animation!.value,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        colors: [
-                          // const Color(0xFF3366FF),
-                          AppColors.gradientDarkGreen,
-                          AppColors.gradientLightGreen,
-                        ],
-                        begin: const FractionalOffset(0.0, 0.0),
-                        end: const FractionalOffset(1.0, 0.0),
-                        stops: [0.0, 1.0],
-                        tileMode: TileMode.clamp),
-                    borderRadius: BorderRadius.circular(50),
+                builder: (context, constraints) => Obx(
+            ()=> Container(
+                    // from 0 to 1 it takes 60s
+                    width: controller.animation!= null ? constraints.maxWidth * controller.animation!.value : 0,
+                    // constraints.maxWidth * controller.animation!.value,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                          colors: [
+                            AppColors.gradientDarkGreen,
+                            AppColors.gradientLightGreen,
+                          ],
+                          begin: const FractionalOffset(0.0, 0.0),
+                          end: const FractionalOffset(1.0, 0.0),
+                          stops: [0.0, 1.0],
+                          tileMode: TileMode.clamp),
+                      borderRadius: BorderRadius.circular(50),
+                    ),
                   ),
                 ),
               ),
@@ -54,8 +54,7 @@ class ProgressBar extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      // Text("${(controller.animation != null ? (controller.animation!.value * 60) : 60).round()} sec"),
-                      TextView(text: "${(controller.animation != null ? (controller.animation!.value * 60) : 60).round()} sec",textStyle: TextStyles.regular12White,),
+                      Obx(()=> TextView(text: "${(controller.animation != null ? (controller.animation!.value * 60) : 60).round()} sec",textStyle: TextStyles.regular12White,)),
                       SvgImage(
                         url: AppIcons.clock,
                         size: 20,
