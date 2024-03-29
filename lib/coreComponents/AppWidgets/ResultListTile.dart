@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:quiz_flutter_app/Model/MCQModel.dart';
 import 'package:quiz_flutter_app/coreComponents/appComponents/TextView.dart';
@@ -16,6 +17,7 @@ class ResultListTile extends StatelessWidget {
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextView(
           text: data.question ?? '',
@@ -36,9 +38,11 @@ class ResultListTile extends StatelessWidget {
                       textStyle: TextStyles.regular15Red,
                     ) : null,
             ),
-            TextView(
-              text: '${data.selectedValue!= null ? data.options![data.selectedValue!].value : 'Not Attempted'}',
-              textStyle: TextStyles.regular12White,
+            Expanded(
+              child: TextView(
+                text: '${data.selectedValue!= null ? data.options![data.selectedValue!].value : 'Not Attempted'}',
+                textStyle: TextStyles.regular12White,
+              ),
             )
           ],
         )

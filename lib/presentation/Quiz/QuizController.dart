@@ -2,9 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quiz_flutter_app/coreComponents/components/DummyData.dart';
 
 import '../../Model/MCQModel.dart';
+import '../../coreComponents/components/DummyData.dart';
+import '../../utils/appUtils.dart';
 
 class QuizController extends GetxController with GetTickerProviderStateMixin {
 
@@ -31,13 +32,23 @@ class QuizController extends GetxController with GetTickerProviderStateMixin {
   final RxInt _correctCount = RxInt(0);
   int get correctCount => _correctCount.value;
 
+  final RxInt _selectedCat = RxInt(0);
+  int get selectCat => _selectedCat.value;
+
+  void onSelectCatAction(int id)=> _selectedCat.value = id;
+
 
 
   //on enter quiz view.....
   getQuestion() {
     _clearQuiz();
+
+    final quizIndex = catModelList.indexWhere((e) => e.id == selectCat);
+
+    final catList = getRandomSublist(catModelList[quizIndex].quizList!, 10);
+
     List<McqModel> list =
-        List<McqModel>.from(quizJSON.map((json) => McqModel.fromJson(json)));
+        List<McqModel>.from(catList.map((element) => McqModel.fromJson(element.toJson())));
     _quiz.assignAll(list);
     _startAnimate();
   }
