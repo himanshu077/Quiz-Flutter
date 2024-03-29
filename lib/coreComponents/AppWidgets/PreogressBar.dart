@@ -41,7 +41,7 @@ class ProgressBar extends StatelessWidget {
                           ],
                           begin: const FractionalOffset(0.0, 0.0),
                           end: const FractionalOffset(1.0, 0.0),
-                          stops: [0.0, 1.0],
+                          stops: const [0.0, 1.0],
                           tileMode: TileMode.clamp),
                       borderRadius: BorderRadius.circular(50),
                     ),

@@ -31,7 +31,6 @@ class _QuizViewState extends State<QuizView> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     quizCtrl.getQuestion();
   }

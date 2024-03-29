@@ -36,15 +36,12 @@ class SvgImage extends StatelessWidget {
             ) : null,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(radius ?? 0),
-              child: Container(
-                child: SvgPicture.asset(
-                  url,
-                  width: size ?? width,
-                  height: size ?? height,
-                  fit: fit ?? BoxFit.cover,
-                  color: tintColor,
-                )
-                ,
+              child: SvgPicture.asset(
+                url,
+                width: size ?? width,
+                height: size ?? height,
+                fit: fit ?? BoxFit.cover,
+                color: tintColor,
               ),
             ),
           ),

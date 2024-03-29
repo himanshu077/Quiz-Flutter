@@ -3,6 +3,7 @@ import 'package:quiz_flutter_app/coreComponents/AppWidgets/AppBgScaffold.dart';
 import 'package:quiz_flutter_app/coreComponents/appComponents/TextView.dart';
 import 'package:quiz_flutter_app/coreComponents/components/TextStyles.dart';
 import 'package:quiz_flutter_app/presentation/Auth/LoginView.dart';
+import 'package:quiz_flutter_app/presentation/Quiz/CategoryListingView.dart';
 import 'package:quiz_flutter_app/utils/AppExtenstions.dart';
 
 class SplashView extends StatefulWidget {
@@ -13,10 +14,8 @@ class SplashView extends StatefulWidget {
 }
 
 class _SplashViewState extends State<SplashView> {
-
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     nextScreen();
   }
@@ -24,7 +23,7 @@ class _SplashViewState extends State<SplashView> {
   // navigate to next view after delay of 3 sec...
   void nextScreen(){
     Future.delayed(const Duration(seconds: 3),(){
-      context.pushNavigator(const LoginView());
+      context.replaceNavigator(const CategoryListingView());
     });
   }
 
