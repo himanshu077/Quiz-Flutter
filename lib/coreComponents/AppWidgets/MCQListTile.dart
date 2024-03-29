@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:quiz_flutter_app/coreComponents/appComponents/AppRadio.dart';
 import 'package:quiz_flutter_app/coreComponents/appComponents/TapWidget.dart';
 import 'package:quiz_flutter_app/coreComponents/appComponents/TextView.dart';
 import 'package:quiz_flutter_app/coreComponents/components/AppColors.dart';
 import 'package:quiz_flutter_app/coreComponents/components/AppFonts.dart';
 import 'package:quiz_flutter_app/coreComponents/components/TextStyles.dart';
-import 'package:quiz_flutter_app/presentation/Quiz/ResultView.dart';
-import 'package:quiz_flutter_app/utils/AppExtenstions.dart';
 
 import '../../Model/MCQOptionItemModel.dart';
 
