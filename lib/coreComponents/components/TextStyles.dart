@@ -165,6 +165,7 @@ class TextStyles{
   static TextStyle semiBold20Black = TextStyle(color: AppColors.black, fontSize: AppFonts.s20, fontFamily: Family.semiBold);
 
   static TextStyle semiBold22P_Green = TextStyle(color: AppColors.primaryGreen, fontSize: AppFonts.s22, fontFamily: Family.semiBold);
+  static TextStyle semiBold22White = TextStyle(color: AppColors.white, fontSize: AppFonts.s22, fontFamily: Family.semiBold);
 
   static TextStyle semiBold30Black = TextStyle(color: AppColors.black, fontSize: AppFonts.s30, fontFamily: Family.semiBold);
 

@@ -22,7 +22,6 @@ class _ResultViewState extends State<ResultView> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     quizCtrl.generateReport();
   }
